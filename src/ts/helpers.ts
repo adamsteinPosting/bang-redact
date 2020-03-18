@@ -15,6 +15,7 @@ function setData(data: string, passCallback: Function) {
       })
       .join(", ");
   }
+  chrome.tabs.reload();
 }
 
 let coronaBuddyDefaultData = "Gay Nigger 1, Gay Nigger 2";

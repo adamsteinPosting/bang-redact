@@ -1,4 +1,3 @@
-window.addEventListener("load", function() {
   chrome.storage.sync.get("gayNiggerStorage", function(obj) {
     if (!obj.gayNiggerStorage) {
       setData(coronaBuddyDefaultData, function() {});
@@ -32,4 +31,3 @@ window.addEventListener("load", function() {
       });
     }
   });
-});

@@ -15,5 +15,6 @@ function setData(data, passCallback) {
         })
             .join(", ");
     }
+    chrome.tabs.reload();
 }
 var coronaBuddyDefaultData = "Gay Nigger 1, Gay Nigger 2";

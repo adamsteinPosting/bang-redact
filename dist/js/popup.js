@@ -40,23 +40,21 @@ function callUnset() {
             .parentNode.insertBefore(cleared, document.getElementById("popup__clear").nextSibling);
     });
 }
-window.addEventListener("load", function () {
-    chrome.storage.sync.get("gayNiggerStorage", function (obj) {
-        if (!obj.gayNiggerStorage) {
-            setData(coronaBuddyDefaultData, function () { });
-        }
-        else {
-            getPopupTextArea().value = obj.gayNiggerStorage.split(",").join(", ");
-        }
-    });
-    document
-        .getElementById("popup__textarea")
-        .addEventListener("keydown", function (event) {
-        if (event.key === "Enter") {
-            event.preventDefault();
-            callSet();
-        }
-    });
-    document.getElementById("popup__save").addEventListener("click", callSet);
-    document.getElementById("popup__clear").addEventListener("click", callUnset);
+chrome.storage.sync.get("gayNiggerStorage", function (obj) {
+    if (!obj.gayNiggerStorage) {
+        setData(coronaBuddyDefaultData, function () { });
+    }
+    else {
+        getPopupTextArea().value = obj.gayNiggerStorage.split(",").join(", ");
+    }
 });
+document
+    .getElementById("popup__textarea")
+    .addEventListener("keydown", function (event) {
+    if (event.key === "Enter") {
+        event.preventDefault();
+        callSet();
+    }
+});
+document.getElementById("popup__save").addEventListener("click", callSet);
+document.getElementById("popup__clear").addEventListener("click", callUnset);
