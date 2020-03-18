@@ -1,0 +1,27 @@
+{
+  "manifest_version": 2,
+  "name": "Coronabuddy",
+  "version": "0.4",
+
+  "description": "Shut them down.",
+
+  "permissions": ["tabs", "storage"],
+
+  "content_scripts": [
+    {
+      "matches": ["*://therightstuff.biz/bang/*"],
+      "js": ["./dist/js/script.js"],
+      "web_accessible_resources": ["./dist/js/helpers.js"],
+      "run_at": "document_end"
+    }
+  ],
+  "icons": {
+    "16": "./icons/virusSprite16.png",
+    "48": "./icons/virusSprite48.png",
+    "128": "./icons/virusSprite128.png"
+  },
+  "browser_action": {
+    "default_title": "Coronabuddy",
+    "default_popup": "popup.html"
+  }
+}

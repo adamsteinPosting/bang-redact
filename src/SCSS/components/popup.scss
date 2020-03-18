@@ -1,0 +1,24 @@
+.popup {
+  padding-top: 1em;
+}
+
+.popup__textarea {
+  color: $black;
+  font-size: 1.1em;
+  padding: 0.5em 0.5em 0.5em 0.5em;
+  width: 13em;
+  height: 12em;
+  resize: none;
+}
+
+.popup__button {
+  margin-top: 0.5em;
+  margin-left: auto;
+  margin-right: 0em;
+  display: block;
+}
+
+.popup__notification {
+  color: $red;
+  font-weight: 700;
+}

@@ -1,0 +1,15 @@
+{
+    "compilerOptions": {
+      "rootDir": "./src/ts",                  
+      "outDir": "./dist/js",                   
+      "target": "es3",                     
+      "module": "es6",                       
+      "lib": ["es6", "dom"],                   
+      "removeComments": true,                  
+      "downlevelIteration": true,               
+      "strict": true,                           
+      "types": ["chrome"],                    
+      "esModuleInterop": true,                 
+      "forceConsistentCasingInFileNames": true
+    }
+  }
