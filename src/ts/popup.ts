@@ -1,4 +1,4 @@
-function clearNiggerAlerts() {
+function coronaBuddyClearNiggerAlerts() {
   let elmCleared = document.getElementById("cleared");
   let elmSaved = document.getElementById("saved");
   if (elmCleared) {
@@ -9,8 +9,8 @@ function clearNiggerAlerts() {
   }
 }
 
-function callSet() {
-  let gayNiggerList = getPopupTextArea()
+function coronaBuddyCallSet() {
+  let gayNiggerList = coronaBuddyGetPopupTextArea()
     .value.trim()
     .split(",")
     .map((name: string) => {
@@ -19,7 +19,7 @@ function callSet() {
     .join(",");
 
   setData(gayNiggerList, function() {
-    clearNiggerAlerts();
+    coronaBuddyClearNiggerAlerts();
     let saved = document.createElement("p");
     saved.innerHTML = "Nigger list saved!";
     saved.id = "saved";
@@ -34,9 +34,9 @@ function callSet() {
   });
 }
 
-function callUnset() {
+function coronaBuddyCallUnset() {
   setData(coronaBuddyDefaultData, function() {
-    clearNiggerAlerts();
+    coronaBuddyClearNiggerAlerts();
     let cleared = document.createElement("p");
     cleared.innerHTML = "Nigger list reset!";
     cleared.id = "cleared";
@@ -55,7 +55,9 @@ chrome.storage.sync.get("gayNiggerStorage", function(obj) {
   if (!obj.gayNiggerStorage) {
     setData(coronaBuddyDefaultData, function() {});
   } else {
-    getPopupTextArea().value = obj.gayNiggerStorage.split(",").join(", ");
+    coronaBuddyGetPopupTextArea().value = obj.gayNiggerStorage
+      .split(",")
+      .join(", ");
   }
 });
 
@@ -64,8 +66,12 @@ document
   .addEventListener("keydown", function(event) {
     if (event.key === "Enter") {
       event.preventDefault();
-      callSet();
+      coronaBuddyCallSet();
     }
   });
-document.getElementById("popup__save")!.addEventListener("click", callSet);
-document.getElementById("popup__clear")!.addEventListener("click", callUnset);
+document
+  .getElementById("popup__save")!
+  .addEventListener("click", coronaBuddyCallSet);
+document
+  .getElementById("popup__clear")!
+  .addEventListener("click", coronaBuddyCallUnset);

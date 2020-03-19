@@ -1,4 +1,4 @@
-function getPopupTextArea() {
+function coronaBuddyGetPopupTextArea() {
   return <HTMLInputElement>document.getElementById("popup__textarea");
 }
 
@@ -6,8 +6,8 @@ function setData(data: string, passCallback: Function) {
   chrome.storage.sync.set({ gayNiggerStorage: data }, function() {
     passCallback();
   });
-  if (getPopupTextArea()) {
-    getPopupTextArea().value = data
+  if (coronaBuddyGetPopupTextArea()) {
+    coronaBuddyGetPopupTextArea().value = data
       .trim()
       .split(",")
       .map((name: string) => {

@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Coronabuddy",
-  "version": "0.4.1",
+  "version": "0.4.3",
 
   "description": "Shut them down.",
 
@@ -10,9 +10,8 @@
   "content_scripts": [
     {
       "matches": ["*://therightstuff.biz/bang/*"],
-      "js": ["./dist/js/script.js"],
-      "web_accessible_resources": ["./dist/js/helpers.js"],
-      "run_at": "document_end"
+      "js": ["./dist/js/helpers.js", "./dist/js/script.js"],
+      "run_at": "document_start"
     }
   ],
   "icons": {

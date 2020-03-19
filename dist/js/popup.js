@@ -1,5 +1,5 @@
 "use strict";
-function clearNiggerAlerts() {
+function coronaBuddyClearNiggerAlerts() {
     var elmCleared = document.getElementById("cleared");
     var elmSaved = document.getElementById("saved");
     if (elmCleared) {
@@ -9,8 +9,8 @@ function clearNiggerAlerts() {
         elmSaved.remove();
     }
 }
-function callSet() {
-    var gayNiggerList = getPopupTextArea()
+function coronaBuddyCallSet() {
+    var gayNiggerList = coronaBuddyGetPopupTextArea()
         .value.trim()
         .split(",")
         .map(function (name) {
@@ -18,7 +18,7 @@ function callSet() {
     })
         .join(",");
     setData(gayNiggerList, function () {
-        clearNiggerAlerts();
+        coronaBuddyClearNiggerAlerts();
         var saved = document.createElement("p");
         saved.innerHTML = "Nigger list saved!";
         saved.id = "saved";
@@ -28,9 +28,9 @@ function callSet() {
             .parentNode.insertBefore(saved, document.getElementById("popup__clear").nextSibling);
     });
 }
-function callUnset() {
+function coronaBuddyCallUnset() {
     setData(coronaBuddyDefaultData, function () {
-        clearNiggerAlerts();
+        coronaBuddyClearNiggerAlerts();
         var cleared = document.createElement("p");
         cleared.innerHTML = "Nigger list reset!";
         cleared.id = "cleared";
@@ -45,7 +45,9 @@ chrome.storage.sync.get("gayNiggerStorage", function (obj) {
         setData(coronaBuddyDefaultData, function () { });
     }
     else {
-        getPopupTextArea().value = obj.gayNiggerStorage.split(",").join(", ");
+        coronaBuddyGetPopupTextArea().value = obj.gayNiggerStorage
+            .split(",")
+            .join(", ");
     }
 });
 document
@@ -53,8 +55,12 @@ document
     .addEventListener("keydown", function (event) {
     if (event.key === "Enter") {
         event.preventDefault();
-        callSet();
+        coronaBuddyCallSet();
     }
 });
-document.getElementById("popup__save").addEventListener("click", callSet);
-document.getElementById("popup__clear").addEventListener("click", callUnset);
+document
+    .getElementById("popup__save")
+    .addEventListener("click", coronaBuddyCallSet);
+document
+    .getElementById("popup__clear")
+    .addEventListener("click", coronaBuddyCallUnset);

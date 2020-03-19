@@ -1,13 +1,13 @@
 "use strict";
-function getPopupTextArea() {
+function coronaBuddyGetPopupTextArea() {
     return document.getElementById("popup__textarea");
 }
 function setData(data, passCallback) {
     chrome.storage.sync.set({ gayNiggerStorage: data }, function () {
         passCallback();
     });
-    if (getPopupTextArea()) {
-        getPopupTextArea().value = data
+    if (coronaBuddyGetPopupTextArea()) {
+        coronaBuddyGetPopupTextArea().value = data
             .trim()
             .split(",")
             .map(function (name) {
