@@ -7,11 +7,11 @@ function coronaBuddyRedactPosts(poster: Element, node: Element) {
 }
 
 function coronaBuddyOnDOMLoad() {
-  let posts = document.getElementsByClassName("post-element"),
-    topics = document.getElementsByClassName("topic"),
-    topicPoster = document.getElementsByClassName("topic-poster"),
-    quotes = document.getElementsByClassName("content-element"),
-    activity = document.getElementsByTagName("blockquote"),
+  let posts = document.body.getElementsByClassName("post-element"),
+    topics = document.body.getElementsByClassName("topic"),
+    topicPoster = document.body.getElementsByClassName("topic-poster"),
+    quotes = document.body.getElementsByClassName("content-element"),
+    activity = document.body.getElementsByTagName("blockquote"),
     coronaBuddyRedactions: Array<HTMLCollectionOf<Element>> = [
       posts,
       topics,
@@ -89,8 +89,13 @@ function coronaBuddyOnDOMLoad() {
   }
 }
 
-// chronologically this occurs at the stage outlined in the
-// manifest, "document_start", to expedite the async API call
+function parseNodes() {
+  // I realize this is sloppy but it's not currently problematic
+  try {
+    coronaBuddyOnDOMLoad();
+  } catch {}
+}
+
 chrome.storage.sync.get("gayNiggerStorage", function(obj) {
   if (!obj.gayNiggerStorage) {
     setData(coronaBuddyDefaultData, function() {});
@@ -105,5 +110,10 @@ chrome.storage.sync.get("gayNiggerStorage", function(obj) {
   }
 });
 
-// specifically waits to receive the dom tree before running
-window.addEventListener("DOMContentLoaded", coronaBuddyOnDOMLoad, false);
+let observer = new MutationObserver(parseNodes);
+
+observer.observe(document, {
+  attributes: true,
+  childList: true,
+  subtree: true
+});

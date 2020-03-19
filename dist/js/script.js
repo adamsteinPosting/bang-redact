@@ -6,7 +6,7 @@ function coronaBuddyRedactPosts(poster, node) {
     }
 }
 function coronaBuddyOnDOMLoad() {
-    var posts = document.getElementsByClassName("post-element"), topics = document.getElementsByClassName("topic"), topicPoster = document.getElementsByClassName("topic-poster"), quotes = document.getElementsByClassName("content-element"), activity = document.getElementsByTagName("blockquote"), coronaBuddyRedactions = [
+    var posts = document.body.getElementsByClassName("post-element"), topics = document.body.getElementsByClassName("topic"), topicPoster = document.body.getElementsByClassName("topic-poster"), quotes = document.body.getElementsByClassName("content-element"), activity = document.body.getElementsByTagName("blockquote"), coronaBuddyRedactions = [
         posts,
         topics,
         topicPoster,
@@ -53,6 +53,12 @@ function coronaBuddyOnDOMLoad() {
         }
     }
 }
+function parseNodes() {
+    try {
+        coronaBuddyOnDOMLoad();
+    }
+    catch (_a) { }
+}
 chrome.storage.sync.get("gayNiggerStorage", function (obj) {
     if (!obj.gayNiggerStorage) {
         setData(coronaBuddyDefaultData, function () { });
@@ -64,4 +70,9 @@ chrome.storage.sync.get("gayNiggerStorage", function (obj) {
             .join("|"), "gi");
     }
 });
-window.addEventListener("DOMContentLoaded", coronaBuddyOnDOMLoad, false);
+var observer = new MutationObserver(parseNodes);
+observer.observe(document, {
+    attributes: true,
+    childList: true,
+    subtree: true
+});
