@@ -39,6 +39,17 @@ function coronaBuddyOnDOMLoad() {
                         break;
                     case 3:
                         poster = coronaBuddyRedactions[iterator][iterator2].getElementsByClassName("profile-link")[0];
+                        if (poster.parentElement.classList.contains("forum-lastpost-small")) {
+                            poster = poster.parentElement.parentElement.parentElement.getElementsByClassName("forum-poster")[0];
+                            if (poster
+                                .getElementsByClassName("profile-link")[0]
+                                .innerHTML.match(coronaBuddyRegex)) {
+                                poster.getElementsByClassName("profile-link")[0].innerHTML =
+                                    "Muted Poster";
+                                poster.getElementsByClassName("forum-poster-avatar")[0].innerHTML = "❌";
+                            }
+                            poster = null;
+                        }
                         break;
                     case 4:
                         poster = coronaBuddyRedactions[iterator][iterator2].getElementsByClassName("profile-link")[0];

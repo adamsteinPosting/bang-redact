@@ -67,6 +67,28 @@ function coronaBuddyOnDOMLoad() {
             poster = coronaBuddyRedactions[iterator][
               iterator2
             ].getElementsByClassName("profile-link")[0];
+            // prevents a category being redacted by having a blocked last poster
+            // I could also get the page URL with a background script sending a message
+            // this is sufficient and will work until I feel I need a background script
+            if (
+              poster.parentElement!.classList.contains("forum-lastpost-small")
+            ) {
+              poster = poster.parentElement!.parentElement!.parentElement!.getElementsByClassName(
+                "forum-poster"
+              )[0];
+              if (
+                poster
+                  .getElementsByClassName("profile-link")[0]
+                  .innerHTML.match(coronaBuddyRegex)
+              ) {
+                poster.getElementsByClassName("profile-link")[0].innerHTML =
+                  "Muted Poster";
+                poster.getElementsByClassName(
+                  "forum-poster-avatar"
+                )[0].innerHTML = "❌";
+              }
+              poster = null;
+            }
             break;
           // activity
           case 4:
