@@ -1,10 +1,10 @@
 {
     "compilerOptions": {
-      "rootDir": "./src/ts",                  
-      "outDir": "./dist/js",                   
-      "target": "es3",                     
+      "rootDir": "./src/scripts/ts",                  
+      "outDir": "./src/scripts/tsCompiled",                   
+      "target": "es5",                     
       "module": "es6",                       
-      "lib": ["es6", "dom"],                   
+      "lib": ["es2017", "es6", "DOM", "DOM.Iterable"],                   
       "removeComments": true,                  
       "downlevelIteration": true,               
       "strict": true,                           

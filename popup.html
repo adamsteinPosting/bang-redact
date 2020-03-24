@@ -2,19 +2,26 @@
 <html>
 
 <head>
-    <link rel="stylesheet" href="./dist/css/root.min.css">
+    <link rel="stylesheet" href="./dist/CSS/root.min.css">
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>whatchu lookin' at boi</title>
 </head>
 
 <body>
-    Redaction List
-    <div class="popup">
-        <textarea id="popup__textarea" class="popup__textarea">
-    </textarea>
+    <div class="popup__banner">
+        <p class="popup__banner--text">Coronabuddy</p>
     </div>
-    <button id="popup__save">Save this shit</button>
-    <button id="popup__clear">CLEAR, BZZT</button>
+    <div class="popup">
+        <textarea id="popup__textarea" class="popup__textarea"></textarea>
+    </div>
+    <div class="popup__button--center">
+    <button id="popup__save" class="popup__button popup__button--save"><p id="popup__save--text" class="popup__button--text">SAVE LIST</p></button>
+    <button id="popup__clear" class="popup__button popup__button--clear"><p class="popup__button--text">CLEAR LIST</p></button>
+    </div>
+    <!-- Scripts -->
+    <!-- our scripts are first compiled via ts then babel for optimization -->
+    <!-- babel:
+    npx babel src/scripts/tsCompiled --out-dir dist/js/ -->
     <script type="text/javascript" src="./dist/js/helpers.js"></script>
     <script type="text/javascript" src="./dist/js/popup.js"></script>
 </body>

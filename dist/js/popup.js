@@ -1,66 +1,57 @@
 "use strict";
-function coronaBuddyClearNiggerAlerts() {
-    var elmCleared = document.getElementById("cleared");
-    var elmSaved = document.getElementById("saved");
-    if (elmCleared) {
-        elmCleared.remove();
+
+(function () {
+    function callSet() {
+        var _a = coronaBuddyGetPopupTextArea().value.trim().split(",");
+
+        var _f = function (name) {
+            return name.trim();
+        };
+
+        var _r = [];
+
+        for (var _i = 0; _i < _a.length; _i++) {
+            _r.push(_f(_a[_i], _i, _a));
+        }
+
+        var GAYNIGGERLIST = _r.join(", ");
+        coronaBuddySetData(GAYNIGGERLIST, function () {});
     }
-    if (elmSaved) {
-        elmSaved.remove();
+    function callUnset() {
+        coronaBuddySetData(coronaBuddyDefaultData, function () {});
     }
-}
-function coronaBuddyCallSet() {
-    var gayNiggerList = coronaBuddyGetPopupTextArea()
-        .value.trim()
-        .split(",")
-        .map(function (name) {
-        return name.trim();
-    })
-        .join(",");
-    setData(gayNiggerList, function () {
-        coronaBuddyClearNiggerAlerts();
-        var saved = document.createElement("p");
-        saved.innerHTML = "Nigger list saved!";
-        saved.id = "saved";
-        saved.classList.add("popup__notification");
-        document
-            .getElementById("popup__save")
-            .parentNode.insertBefore(saved, document.getElementById("popup__clear").nextSibling);
+    chrome.storage.sync.get("gayNiggerStorage", function (obj) {
+        if (!obj.gayNiggerStorage) {
+            coronaBuddySetData(coronaBuddyDefaultData, function () {});
+        } else {
+            var _a2 = obj.gayNiggerStorage.split(",");
+
+            var _f2 = function (name) {
+                return name.trim();
+            };
+
+            var _r2 = [];
+
+            for (var _i2 = 0; _i2 < _a2.length; _i2++) {
+                _r2.push(_f2(_a2[_i2], _i2, _a2));
+            }
+
+            coronaBuddyGetPopupTextArea().value = _r2.join(", ");
+        }
     });
-}
-function coronaBuddyCallUnset() {
-    setData(coronaBuddyDefaultData, function () {
-        coronaBuddyClearNiggerAlerts();
-        var cleared = document.createElement("p");
-        cleared.innerHTML = "Nigger list reset!";
-        cleared.id = "cleared";
-        cleared.classList.add("popup__notification");
-        document
-            .getElementById("popup__clear")
-            .parentNode.insertBefore(cleared, document.getElementById("popup__clear").nextSibling);
+    document.getElementById("popup__textarea").addEventListener("keydown", function (event) {
+        if (event.key === "Enter") {
+            event.preventDefault();
+            callSet();
+            document.getElementById("popup__save").classList.add('popup__button--invert');
+            document.getElementById("popup__save--text").classList.add('popup__button--invert');
+            setTimeout(function () {
+                document.getElementById("popup__save").classList.remove('popup__button--invert');
+                document.getElementById("popup__save--text").classList.remove('popup__button--invert');
+            }, 300);
+        }
     });
-}
-chrome.storage.sync.get("gayNiggerStorage", function (obj) {
-    if (!obj.gayNiggerStorage) {
-        setData(coronaBuddyDefaultData, function () { });
-    }
-    else {
-        coronaBuddyGetPopupTextArea().value = obj.gayNiggerStorage
-            .split(",")
-            .join(", ");
-    }
-});
-document
-    .getElementById("popup__textarea")
-    .addEventListener("keydown", function (event) {
-    if (event.key === "Enter") {
-        event.preventDefault();
-        coronaBuddyCallSet();
-    }
-});
-document
-    .getElementById("popup__save")
-    .addEventListener("click", coronaBuddyCallSet);
-document
-    .getElementById("popup__clear")
-    .addEventListener("click", coronaBuddyCallUnset);
+
+    document.getElementById("popup__save").addEventListener("click", callSet);
+    document.getElementById("popup__clear").addEventListener("click", callUnset);
+})();

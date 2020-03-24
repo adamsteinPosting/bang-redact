@@ -1,24 +1,114 @@
+@import url('https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap');
+$pressStart: 'Press Start 2P', cursive;
+
+body {
+  background-color: $black;
+  min-width: 1em;
+  min-height: 15em;
+  padding: 1em 1em 1em 1em;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  font-size: 1.3em;
+  border: none;
+}
+
+
 .popup {
   padding-top: 1em;
 }
 
+.popup__banner {
+  position: absolute;
+  top: 0;
+  background-color: $black;
+  width: 100vw;
+  height: 2.5em;
+  margin-left: -1em;
+  box-shadow: 0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12);
+}
+
+.popup__banner--text {
+  color: lime;
+  font-size: 0.8em;
+  font-family: $pressStart;
+  text-align: center;
+  margin-top: 1.7em;
+}
+
 .popup__textarea {
-  color: $black;
+  color: lime;
+  background-color: $black;
   font-size: 1.1em;
   padding: 0.5em 0.5em 0.5em 0.5em;
-  width: 13em;
+  width: 7em;
   height: 12em;
   resize: none;
+  margin-bottom: 0.3em;
+  margin-top: 1em;
+  &:focus {
+    outline: none;
+  }
 }
 
 .popup__button {
-  margin-top: 0.5em;
-  margin-left: auto;
-  margin-right: 0em;
+  background-color: rgb(45, 45, 45);
+  width: 65vw;
+  height: 6vh;
+  border: 0px solid lime;
+  font-size: 1em;
   display: block;
+  margin: 0 auto;
+  border: none;
+  box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 3px 1px -2px rgba(0,0,0,0.12);
+  transition: border 0.3s;
+  &:focus {
+    outline: none;
+  }
+  &:hover {
+    border: 4px solid lime;
+    transition: border 0.3s;
+  }
+  &:active {
+    background-color: lime;
+  }
+}
+
+.popup__button--invert {
+  background-color: lime;
+  color: $black !important;
+}
+
+.popup__button--black {
+  background-color: rgb(45, 45, 45);
+}
+
+.popup__button--center {
+  display: block;
+  text-align: center;
+}
+
+.popup__button--text {
+  color: lime;
+  font-weight: 500;
+  font-family: $pressStart;
+  margin: 0;
+  font-size: 0.5em;
+  &:active {
+    color: $black !important;
+  }
+}
+
+.popup__button--save {
+  margin-bottom: 0.5em;
+}
+
+.popup__button--clear {
 }
 
 .popup__notification {
   color: $red;
   font-weight: 700;
+  margin-top: 0.5em;
 }

@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Coronabuddy",
-  "version": "0.4.5",
+  "version": "0.5.2",
 
   "description": "Shut them down.",
 
@@ -20,6 +20,7 @@
     "128": "./icons/virusSprite128.png"
   },
   "browser_action": {
+    "default_icon": "icons/virusSprite48.png",
     "default_title": "Coronabuddy",
     "default_popup": "popup.html"
   }
