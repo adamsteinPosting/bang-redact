@@ -2,6 +2,8 @@
   let gayNiggerList: RegExp;
   // async messager
   let gayNiggersRetrieved: boolean = false;
+  let darkModeSet: boolean = false;
+  let darkModeEnabled: boolean = false;
 
   function redactPosts(poster: Element, element: Element) {
     if (poster.innerHTML.match(gayNiggerList)) {
@@ -122,7 +124,21 @@
             if (MUTATEDELEMENT && MUTATEDELEMENT.tagName === "DIV") {
               try {
                 asDOMLoads(MUTATEDELEMENT);
-              } catch {}
+                if (darkModeEnabled && document.head && darkModeSet === false) {
+                  darkModeSet = true;
+                  document.head.appendChild(
+                    templateDOMElement({
+                      tag: "style",
+                      innerHTML: darkCSS,
+                      id: "",
+                      classList: "",
+                      style: ""
+                    })
+                  );
+                }
+              } catch (error) {
+                // console.log(error)
+              }
             }
           }
         }
@@ -132,7 +148,7 @@
 
   chrome.storage.sync.get("gayNiggerStorage", function(data) {
     if (!data.gayNiggerStorage) {
-      coronaBuddySetData(coronaBuddyDefaultData, function() {});
+      coronaBuddySetGayNiggerStorage(coronaBuddyDefaultData, function() {});
     } else {
       gayNiggerList = new RegExp(
         data.gayNiggerStorage
@@ -145,6 +161,16 @@
         "gi"
       );
       gayNiggersRetrieved = true;
+    }
+  });
+
+  chrome.storage.sync.get("coronaBuddyDarkMode", function(data) {
+    if (!data.coronaBuddyDarkMode) {
+      coronaBuddySetDarkMode("false", function() {});
+    } else {
+      if (data.coronaBuddyDarkMode === "true") {
+        darkModeEnabled = true;
+      }
     }
   });
 

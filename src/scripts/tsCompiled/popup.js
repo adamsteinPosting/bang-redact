@@ -8,22 +8,44 @@
             return name.trim();
         })
             .join(", ");
-        coronaBuddySetData(GAYNIGGERLIST, function () { });
+        coronaBuddySetGayNiggerStorage(GAYNIGGERLIST, function () { });
     }
     function callUnset() {
-        coronaBuddySetData(coronaBuddyDefaultData, function () { });
+        coronaBuddySetGayNiggerStorage(coronaBuddyDefaultData, function () { });
     }
-    chrome.storage.sync.get("gayNiggerStorage", function (obj) {
-        if (!obj.gayNiggerStorage) {
-            coronaBuddySetData(coronaBuddyDefaultData, function () { });
+    function callCheck(evt) {
+        evt.target.classList.toggle("popup__darkmode--checkbox--check");
+        if (evt.target.classList.contains("popup__darkmode--checkbox--check")) {
+            coronaBuddySetDarkMode("true", function () { });
         }
         else {
-            coronaBuddyGetPopupTextArea().value = obj.gayNiggerStorage
+            coronaBuddySetDarkMode("false", function () { });
+        }
+    }
+    chrome.storage.sync.get("gayNiggerStorage", function (data) {
+        if (!data.gayNiggerStorage) {
+            coronaBuddySetGayNiggerStorage(coronaBuddyDefaultData, function () { });
+        }
+        else {
+            console.log(data);
+            coronaBuddyGetPopupTextArea().value = data.gayNiggerStorage
                 .split(",")
                 .map(function (name) {
                 return name.trim();
             })
                 .join(", ");
+        }
+    });
+    chrome.storage.sync.get("coronaBuddyDarkMode", function (data) {
+        if (!data.coronaBuddyDarkMode) {
+            coronaBuddySetDarkMode("false", function () { });
+        }
+        else {
+            if (data.coronaBuddyDarkMode === "true") {
+                document
+                    .getElementById("popup__check")
+                    .classList.add("popup__darkmode--checkbox--check");
+            }
         }
     });
     document
@@ -32,15 +54,23 @@
         if (event.key === "Enter") {
             event.preventDefault();
             callSet();
-            document.getElementById("popup__save").classList.add('popup__button--invert');
-            document.getElementById("popup__save--text").classList.add('popup__button--invert');
+            document
+                .getElementById("popup__save")
+                .classList.add("popup__button--invert");
+            document
+                .getElementById("popup__save--text")
+                .classList.add("popup__button--invert");
             setTimeout(function () {
-                document.getElementById("popup__save").classList.remove('popup__button--invert');
-                document.getElementById("popup__save--text").classList.remove('popup__button--invert');
-            }, 300);
+                document
+                    .getElementById("popup__save")
+                    .classList.remove("popup__button--invert");
+                document
+                    .getElementById("popup__save--text")
+                    .classList.remove("popup__button--invert");
+            }, 1000);
         }
     });
-    
     document.getElementById("popup__save").addEventListener("click", callSet);
     document.getElementById("popup__clear").addEventListener("click", callUnset);
+    document.getElementById("popup__check").addEventListener("click", callCheck);
 })();

@@ -112,3 +112,35 @@ body {
   font-weight: 700;
   margin-top: 0.5em;
 }
+
+.popup__darkmode {
+  margin-top: 1em;
+  text-align: center;
+}
+
+.popup__darkmode--text {
+  display: inline-block;
+  color: lime;
+  font-size: 0.6em;
+  font-family: $pressStart;
+  margin-right: 0.5em;
+}
+
+.popup__darkmode--checkbox {
+  display: inline-block;
+  @include box(0.8em);  
+  background-color: #555;
+  border-radius: 0.1em;
+  margin-bottom: -0.08em;
+  user-select: none;
+}
+
+.popup__darkmode--checkbox--check:after {
+  content: '✓';
+  position: absolute;
+  color: lime;
+  font-size: 0.6em;
+  font-weight: 900;
+  margin-left: -0.42em;
+  margin-top: 0.1em;
+}

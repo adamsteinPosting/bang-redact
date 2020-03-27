@@ -13,6 +13,8 @@ var __values = (this && this.__values) || function(o) {
 (function () {
     var gayNiggerList;
     var gayNiggersRetrieved = false;
+    var darkModeSet = false;
+    var darkModeEnabled = false;
     function redactPosts(poster, element) {
         if (poster.innerHTML.match(gayNiggerList)) {
             element.style.display = "none";
@@ -87,8 +89,19 @@ var __values = (this && this.__values) || function(o) {
                                 if (MUTATEDELEMENT && MUTATEDELEMENT.tagName === "DIV") {
                                     try {
                                         asDOMLoads(MUTATEDELEMENT);
+                                        if (darkModeEnabled && document.head && darkModeSet === false) {
+                                            darkModeSet = true;
+                                            document.head.appendChild(templateDOMElement({
+                                                tag: "style",
+                                                innerHTML: darkCSS,
+                                                id: "",
+                                                classList: "",
+                                                style: ""
+                                            }));
+                                        }
                                     }
-                                    catch (_e) { }
+                                    catch (error) {
+                                    }
                                 }
                             }
                         }
@@ -113,7 +126,7 @@ var __values = (this && this.__values) || function(o) {
     }
     chrome.storage.sync.get("gayNiggerStorage", function (data) {
         if (!data.gayNiggerStorage) {
-            coronaBuddySetData(coronaBuddyDefaultData, function () { });
+            coronaBuddySetGayNiggerStorage(coronaBuddyDefaultData, function () { });
         }
         else {
             gayNiggerList = new RegExp(data.gayNiggerStorage
@@ -124,6 +137,16 @@ var __values = (this && this.__values) || function(o) {
             })
                 .join("|"), "gi");
             gayNiggersRetrieved = true;
+        }
+    });
+    chrome.storage.sync.get("coronaBuddyDarkMode", function (data) {
+        if (!data.coronaBuddyDarkMode) {
+            coronaBuddySetDarkMode("false", function () { });
+        }
+        else {
+            if (data.coronaBuddyDarkMode === "true") {
+                darkModeEnabled = true;
+            }
         }
     });
     var OBSERVER = new MutationObserver(parseNodes);
