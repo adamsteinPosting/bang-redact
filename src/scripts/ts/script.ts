@@ -4,6 +4,7 @@
   let gayNiggersRetrieved: boolean = false;
   let darkModeSet: boolean = false;
   let darkModeEnabled: boolean = false;
+  let darkModeInjected: boolean = false;
 
   function redactPosts(poster: Element, element: Element) {
     if (poster.innerHTML.match(gayNiggerList)) {
@@ -114,6 +115,23 @@
   }
 
   function parseNodes(mutations: any) {
+    // sloppy injection fix for iframes
+    try {
+      if (
+        // @ts-ignore
+        document.querySelector("#message_ifr")!.contentWindow.document.body &&
+        !darkModeInjected &&
+        darkModeEnabled
+      ) {
+        darkModeInjected = true;
+        document
+          .querySelector("#message_ifr")!
+          // @ts-ignore
+          .contentWindow!.document.head.querySelector("style").innerHTML +=
+          "body {background-color: #121212 !important; color: white !important;} blockquote {border: 1px solid linen !important;}";
+      }
+    } catch {}
+    
     // check async call
     if (gayNiggersRetrieved) {
       for (const MUTATION of mutations) {
@@ -126,11 +144,11 @@
                 asDOMLoads(MUTATEDELEMENT);
                 if (darkModeEnabled && document.head && darkModeSet === false) {
                   darkModeSet = true;
-                  document.head.appendChild(
+                  document.head.lastChild!.after(
                     templateDOMElement({
                       tag: "style",
                       innerHTML: darkCSS,
-                      id: "",
+                      id: "coronaBuddyDarkMode__selector",
                       classList: "",
                       style: ""
                     })

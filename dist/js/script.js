@@ -21,6 +21,7 @@ var __values = this && this.__values || function (o) {
     var gayNiggersRetrieved = false;
     var darkModeSet = false;
     var darkModeEnabled = false;
+    var darkModeInjected = false;
     function redactPosts(poster, element) {
         if (poster.innerHTML.match(gayNiggerList)) {
             element.style.display = "none";
@@ -93,23 +94,29 @@ var __values = this && this.__values || function (o) {
     }
     function parseNodes(mutations) {
         var e_1, _a, e_2, _b;
+        try {
+            if (document.querySelector("#message_ifr").contentWindow.document.body && !darkModeInjected && darkModeEnabled) {
+                darkModeInjected = true;
+                document.querySelector("#message_ifr").contentWindow.document.head.querySelector("style").innerHTML += "body {background-color: #121212 !important; color: white !important;} blockquote {border: 1px solid linen !important;}";
+            }
+        } catch (_c) {}
         if (gayNiggersRetrieved) {
             try {
                 for (var mutations_1 = __values(mutations), mutations_1_1 = mutations_1.next(); !mutations_1_1.done; mutations_1_1 = mutations_1.next()) {
                     var MUTATION = mutations_1_1.value;
                     if (MUTATION.addedNodes) {
                         try {
-                            for (var _c = (e_2 = void 0, __values(MUTATION.addedNodes)), _d = _c.next(); !_d.done; _d = _c.next()) {
-                                var MUTATEDELEMENT = _d.value;
+                            for (var _d = (e_2 = void 0, __values(MUTATION.addedNodes)), _e = _d.next(); !_e.done; _e = _d.next()) {
+                                var MUTATEDELEMENT = _e.value;
                                 if (MUTATEDELEMENT && MUTATEDELEMENT.tagName === "DIV") {
                                     try {
                                         asDOMLoads(MUTATEDELEMENT);
                                         if (darkModeEnabled && document.head && darkModeSet === false) {
                                             darkModeSet = true;
-                                            document.head.appendChild(templateDOMElement({
+                                            document.head.lastChild.after(templateDOMElement({
                                                 tag: "style",
                                                 innerHTML: darkCSS,
-                                                id: "",
+                                                id: "coronaBuddyDarkMode__selector",
                                                 classList: "",
                                                 style: ""
                                             }));
@@ -121,8 +128,8 @@ var __values = this && this.__values || function (o) {
                             e_2 = { error: e_2_1 };
                         } finally {
                             try {
-                                if (_d && !_d.done && (_b = _c.return)) {
-                                    _b.call(_c);
+                                if (_e && !_e.done && (_b = _d.return)) {
+                                    _b.call(_d);
                                 }
                             } finally {
                                 if (e_2) {

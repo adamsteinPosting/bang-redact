@@ -3,24 +3,23 @@ function coronaBuddyGetPopupTextArea() {
 }
 
 function coronaBuddySetGayNiggerStorage(data: string, passCallback: Function) {
-  chrome.storage.sync.set({ "gayNiggerStorage": data }, function() {
+  chrome.storage.sync.set({ gayNiggerStorage: data }, function() {
     passCallback();
   });
-    coronaBuddyWritePopupTextArea(data);
-    try {
-      chrome.tabs.reload();  
-    } catch {}
-}
-
-function coronaBuddySetDarkMode(data: string, passCallback: Function) {
-  chrome.storage.sync.set({ "coronaBuddyDarkMode": data }, function() {
-    passCallback();
-  });
+  coronaBuddyWritePopupTextArea(data);
   try {
-    chrome.tabs.reload();  
+    chrome.tabs.reload();
   } catch {}
 }
 
+function coronaBuddySetDarkMode(data: string, passCallback: Function) {
+  chrome.storage.sync.set({ coronaBuddyDarkMode: data }, function() {
+    passCallback();
+  });
+  try {
+    chrome.tabs.reload();
+  } catch {}
+}
 
 function coronaBuddyWritePopupTextArea(data: string) {
   if (coronaBuddyGetPopupTextArea()) {
@@ -66,7 +65,9 @@ function templateDOMElement({
   }
 }
 
-var darkCSS = `
+var coronaBuddyDefaultData = "Gay Nigger 1, Gay Nigger 2";
+
+var darkCSS = /*css*/ `
 ::selection {
   background: #B4D5FE;
 }
@@ -112,7 +113,6 @@ html:not(root) p {
 }
 
 #af-wrapper #forum-header {
-  /* Override random !important in the WP CSS */
   background-color: #006600 !important;
 }
 
@@ -150,18 +150,34 @@ html:not(root) p {
   border: 0px;
 }
 
-#af-wrapper .content-element:nth-child(2n) {
-  background-color: #232323;
+#af-wrapper .content-element:nth-child(2n):not(.topic-sticky) {
+  background-color: #121212 !important;
+}
+
+#af-wrapper .topic-sticky {
+  background-color: #121212 !important;
+  border-left: none !important;
+  border-right: none !important;
+  border-top: none !important;
+}
+
+#af-wrapper .topic-sticky .fa-comments {
+  color: tomato !important;
+}
+
+#af-wrapper .topic-sticky .topic-name > a {
+  color: #d6203b !important;
+  font-weight: 700 !important;
 }
 
 #af-wrapper .editor-row-subject {
-  background-color: black;
-  color: gray;
+  background-color: black !important;
+  color: gray !important;
 }
 
 #af-wrapper .editor-row-subject > span > input {
-  background-color: #232323;
-  color: linen;
+  background-color: #232323 !important;
+  color: linen !important;
 }
 
 
@@ -187,7 +203,6 @@ html:not(root) p {
 }
 
 #af-wrapper .pages strong {
-  background-color: #232323;
   border-right: none;
   color: black !important;
 }
@@ -196,11 +211,11 @@ html:not(root) p {
   color: red !important;
   font-weight: 900;
   font-size: 1.1em;
-  -webkit-text-stroke: 1px black;
+  -webkit-text-stroke: 1px black !important;
 }
 
 #af-wrapper .post-message > blockquote::after {
-  background: linear-gradient(rgba(0, 0, 0, 0), rgba(249, 249, 249, .4));
+  background: linear-gradient(rgba(0, 0, 0, 0), rgba(249, 249, 249, .4)) !important;
 }
 
 #af-wrapper .post-element {
@@ -211,13 +226,9 @@ html:not(root) p {
   background-color: #006600 !important;
 }
 
-#af-wrapper .topic-sticky {
-  background-color: #121212 !important;
-}
-
 #af-wrapper .topic-sticky .topic-poster {
-  background-color: #121212 !important;
   border-left: 0px;
+  background: none !important;
 }
 
 #af-wrapper .unread {
@@ -250,12 +261,12 @@ html:not(root) p {
 }
 
 .content-container {
-  background-color: #121212 !important;
+  background-color: #232323 !important;
   border-color: black !important;
 }
 
 .dark .site-container {
-  background-color: #121212;
+  background-color: #121212 !important;
 }
 
 .editor-row {
@@ -365,5 +376,3 @@ html:not(root) p {
 .topic-poster {
   border-left: 0px !important;
 }`;
-
-var coronaBuddyDefaultData = "Gay Nigger 1, Gay Nigger 2";
